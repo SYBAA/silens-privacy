@@ -59,7 +59,7 @@
     </div>
   </header>
 
-  <article id="en" lang="en"><h1>Privacy Policy — Silens</h1>
+  <article id="doc-en" lang="en"><h1>Privacy Policy — Silens</h1>
 <p><em>Last updated: 31 July 2026</em></p>
 <h2>Data controller</h2>
 <p>The Silens app, distributed on the Shopify App Store, is published by Sylvain Balas, a natural person established in France, acting in an individual capacity.</p>
@@ -120,7 +120,7 @@
 <p>Since we hold no data attached to an identified customer, we have nothing to return or erase for the first two. For a shop erasure, we delete the technical logs concerning that shop.</p>
 <h2>Changes</h2>
 <p>Any change to this policy will be published on this page, with the date at the top updated accordingly. Substantial changes will be signalled to merchant users through the means available to us on the Shopify platform.</p></article>
-  <article id="fr" lang="fr" hidden><h1>Politique de confidentialité — Silens</h1>
+  <article id="doc-fr" lang="fr" hidden><h1>Politique de confidentialité — Silens</h1>
 <p><em>Dernière mise à jour : 31 juillet 2026</em></p>
 <h2>Responsable du traitement</h2>
 <p>L&#x27;application Silens, distribuée sur le Shopify App Store, est éditée par Sylvain Balas, personne physique établie en France, agissant à titre individuel.</p>
@@ -188,12 +188,15 @@
 <script>
   var boutons = document.querySelectorAll('.bascule button');
   function montrer(langue) {
-    document.getElementById('en').hidden = langue !== 'en';
-    document.getElementById('fr').hidden = langue !== 'fr';
+    document.getElementById('doc-en').hidden = langue !== 'en';
+    document.getElementById('doc-fr').hidden = langue !== 'fr';
     document.documentElement.lang = langue;
     boutons.forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.dataset.langue === langue));
     });
+    // Les articles portent les identifiants doc-en / doc-fr, jamais en / fr :
+    // sinon le navigateur considere #fr comme une ancre, saute a l'article et
+    // masque l'en-tete au chargement. Le visiteur ne voyait plus le selecteur.
     if (history.replaceState) history.replaceState(null, '', langue === 'fr' ? '#fr' : '#en');
   }
   boutons.forEach(function (b) {
